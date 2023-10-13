@@ -1,7 +1,9 @@
 # Development stage
 FROM node:18 as development
 WORKDIR /usr/src/app
-COPY package*.json  ./
+
+COPY ./Api/package.json  /usr/src/app
+
 RUN npm install
 
 COPY ./Api/src ./src
