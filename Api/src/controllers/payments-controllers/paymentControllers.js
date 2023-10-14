@@ -91,7 +91,7 @@ const captureOrder = async (req, res) => {
 
 const cancelOrder = (req, res) => {
   const { token, PayerID } = req.query;
-  res.redirect("http://localhost:3000/cart");
+  res.redirect("http://localhost:3000/store");
 };
 
 module.exports = { createOrder, captureOrder, cancelOrder };
