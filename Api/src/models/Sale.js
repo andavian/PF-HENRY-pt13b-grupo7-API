@@ -12,14 +12,15 @@ module.exports = (sequelize) => {
       amount: {
         type: DataTypes.INTEGER,
       },
-      order_address: {
-        type: DataTypes.TEXT,
-      },
-      order_date: {
-        type: DataTypes.DATEONLY,
-      },
-      order_status: {
-        type: DataTypes.ENUM("approved", "pending", "delivered", "canceled"),
+      status: {
+        type: DataTypes.ENUM(
+          "CREATED",
+          "SAVED",
+          "APPROVED",
+          "VOIDED",
+          "COMPLETED",
+          "PAYER_ACTION_REQUIRED"
+        ),
       },
     },
     { freezeTableName: true, timestamps: false }
