@@ -1,6 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
 const { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } = process.env;
+const { Sale } = require("../../db");
 
 const accessToken = async () => {
   const params = new URLSearchParams();
@@ -60,7 +61,7 @@ const createOrder = async (req, res) => {
 };
 
 const captureOrder = async (req, res) => {
-  const { token, PayerID } = req.query;
+  const { token } = req.query;
 
   const { data } = await axios.post(
     `${PAYPAL_API}/v2/checkout/orders/${token}/capture`,
@@ -74,19 +75,14 @@ const captureOrder = async (req, res) => {
     }
   );
 
-  // if (
-  //   data.status === "COMPLETED"
-  // ) {
-  //   const newOrder = await Order.create({
-  //     id: titleLowerCase,
-  //     price,
-  //     description: descriptionLowerCase,
-  //     primaryimage,
-  //     categoryId,
-  //   });
-  // }
-  console.log(data.purchase_units);
-  res.redirect("http://localhost:3000/confirmacion");
+  const newOrder = await Sale.create({
+    id: data.id,
+    amount: parseInt(data.purchase_units[0].amount.value),
+    status: data.status,
+  });
+
+  console.log(newOrder);
+  res.redirect("http://localhost:3001/getOrder");
 };
 
 const cancelOrder = (req, res) => {
