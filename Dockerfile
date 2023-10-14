@@ -8,7 +8,10 @@ RUN npm install
 
 COPY ./Api/src ./src
 
-CMD [ "npm", "run", "start:dev" ]
+CMD [ "npm", "run", "start" ]
+
+
+
 
 # # Builder stage
 # FROM development as builder
