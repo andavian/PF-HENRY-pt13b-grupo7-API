@@ -1,13 +1,21 @@
 # Development stage
 FROM node:18 as development
 WORKDIR /usr/src/app
+
 COPY ./Api/package.json  /usr/src/app
+
 COPY ./Api/index.js /usr/src/app/
 COPY ./Api/.env /usr/src/app/
 COPY ./Api/package-lock.json /usr/src/app/
+
 RUN npm install
+
 COPY ./Api/src ./src
+
 CMD [ "npm", "run", "start" ]
+
+
+
 
 # # Builder stage
 # FROM development as builder
