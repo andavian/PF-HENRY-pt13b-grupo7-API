@@ -4,6 +4,10 @@ WORKDIR /usr/src/app
 
 COPY ./Api/package.json  /usr/src/app
 
+COPY ./Api/index.js /usr/src/app/
+COPY ./Api/.env /usr/src/app/
+COPY ./Api/package-lock.json /usr/src/app/
+
 RUN npm install
 
 COPY ./Api/src ./src
