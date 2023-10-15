@@ -1,34 +1,39 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  sequelize.define('Client', {
-    id: {
-        type:DataTypes.UUID,
-        defaultValue:DataTypes.UUIDV4,
+  sequelize.define(
+    "Client",
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
-    name:{
-        type : DataTypes.STRING,
-        allowNull:false
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      billingaddress: {
+        type: DataTypes.TEXT,
+      },
+      country: {
+        type: DataTypes.INTEGER,
+      },
+      locality: {
+        type: DataTypes.STRING,
+      },
+      mobilenumber: {
+        type: DataTypes.INTEGER,
+      },
     },
-    email:{
-        type : DataTypes.STRING,
-        allowNull:false
-    },
-    password:{
-        type : DataTypes.TEXT,
-        allowNull:false
-    },
-    billingaddress:{
-        type : DataTypes.TEXT,
-    },
-    country:{
-        type : DataTypes.INTEGER,
-    },
-    locality:{
-        type : DataTypes.STRING,
-    },
-    mobilenumber:{
-        type : DataTypes.INTEGER,
-    }
-  },{freezeTableName: true,timestamps:false})}
+    { freezeTableName: true, timestamps: false }
+  );
+};

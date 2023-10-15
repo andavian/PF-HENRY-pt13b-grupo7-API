@@ -6,7 +6,8 @@ const path = require("path");
 const axios = require("axios");
 const { DB_EXTERNAL } = process.env;
 
-const sequelize = new Sequelize( DB_EXTERNAL,
+const sequelize = new Sequelize(
+  DB_EXTERNAL,
   // `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB}?ssl=true`,
   {
     logging: false, // set to console.log to see the raw SQL queries
@@ -38,19 +39,28 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
-const { Category, Client, Option, Product, Sale } = sequelize.models;
+const { Cart, Category, Client, Favorite, Order, Product } = sequelize.models;
 
 // Aca vendrian las relaciones
-// Option.belongsToMany(Product, { through: "Produc_Color" });
-// Product.belongsToMany(Option, { through: "Produc_Color" });
-// Sale.belongsToMany(Product, {through: "Sale_Product"});
-// Product.belongsToMany(Sale, {through: "Sale_Product"});
 
 Category.hasMany(Product, { foreignKey: "categoryId" });
 Product.belongsTo(Category, { foreignKey: "categoryId" });
 
-Client.hasMany(Client, { foreingnKey: "clientId" });
-Sale.belongsTo(Sale, { foreingnKey: "clientId" });
+//Relacion Cliente con Carrito
+Client.hasOne(Cart);
+Cart.belongsTo(Client);
+
+//Relacion entre Producto y Carrito
+Cart.belongsToMany(Product, { through: "CartProduct" });
+Product.belongsToMany(Cart, { through: "CartProduct" });
+
+//Relacion entre Oreden de compra y Carrito
+Cart.belongsTo(Order);
+Order.hasOne(Cart);
+
+//Relacin entre Favoritos y cclientes
+Favorite.belongsToMany(Client, { through: FavoriteClient });
+Client.belongsToMany(Favorite, { through: FavoriteClient });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
