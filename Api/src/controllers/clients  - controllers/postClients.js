@@ -26,7 +26,7 @@ const postClients = async ({
 
   const checkExistClient = await Client.findAll({
     where: {
-      title: nameLowerCase,
+      name: nameLowerCase,
     },
   });
   if (checkExistClient.length > 0) throw Error("Ya existe el cliente");

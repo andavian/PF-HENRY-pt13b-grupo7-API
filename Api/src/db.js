@@ -59,8 +59,8 @@ Cart.belongsTo(Order);
 Order.hasOne(Cart);
 
 //Relacin entre Favoritos y cclientes
-Favorite.belongsToMany(Client, { through: FavoriteClient });
-Client.belongsToMany(Favorite, { through: FavoriteClient });
+Favorite.belongsToMany(Client, { through: "FavoriteClient" });
+Client.belongsToMany(Favorite, { through: "FavoriteClient" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
       },
       country: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.TEXT,
       },
       locality: {
         type: DataTypes.STRING,
