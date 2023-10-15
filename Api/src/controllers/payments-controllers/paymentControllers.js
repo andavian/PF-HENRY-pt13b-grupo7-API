@@ -82,7 +82,7 @@ const captureOrder = async (req, res) => {
   });
 
   console.log(newOrder);
-  res.redirect("http://localhost:3001/getOrder");
+  res.redirect("http://localhost:3001/orders");
 };
 
 const cancelOrder = (req, res) => {
