@@ -8,7 +8,7 @@ const clientsRoutes = require("./routes-clients");
 const favoritesRoutes = require("./routes-favorites");
 const cartsRoutes = require("./routes-carts.js");
 const productsRoutes = require("./routes-product.js");
-const salesRoutes = require("./routes-sales");
+const ordersRoutes = require("./routes-orders");
 const paymentRoutes = require("./routes-payment");
 
 const router = Router();
@@ -18,7 +18,7 @@ router.use("/clients", clientsRoutes);
 router.use("/favorites", favoritesRoutes);
 router.use("/carts", cartsRoutes);
 router.use("/products", productsRoutes);
-//router.use("/sales", salesRoutes);
+router.use("/orders", ordersRoutes);
 router.use("/payment", paymentRoutes);
 
 module.exports = router;

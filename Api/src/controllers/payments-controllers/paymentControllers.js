@@ -1,7 +1,7 @@
 require("dotenv").config();
 const axios = require("axios");
 const { PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } = process.env;
-const { Sale } = require("../../db");
+const { Order } = require("../../db");
 
 const accessToken = async () => {
   const params = new URLSearchParams();
@@ -75,7 +75,7 @@ const captureOrder = async (req, res) => {
     }
   );
 
-  const newOrder = await Sale.create({
+  const newOrder = await Order.create({
     id: data.id,
     amount: parseInt(data.purchase_units[0].amount.value),
     status: data.status,
