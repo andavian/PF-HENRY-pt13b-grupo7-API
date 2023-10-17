@@ -1,18 +1,18 @@
 //Get Client By Name
 const { Op } = require("sequelize");
-const { Client } = require("../../db");
+const { User } = require("../../db");
 
-const getClientByName = async (name) => {
+const getUserByName = async (name) => {
   const nameLowerCase = name.toLowerCase();
 
-  const client = await Client.findAll({
+  const user = await User.findAll({
     where: {
       name: {
         [Op.iLike]: `%${nameLowerCase}%`,
       },
     },
   });
-  return client;
+  return user;
 };
 
-module.exports = getClientByName;
+module.exports = getUserByName;

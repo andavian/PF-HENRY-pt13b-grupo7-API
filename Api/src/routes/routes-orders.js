@@ -5,6 +5,7 @@ const ordersRutes = Router();
 const {
   getOrders,
 } = require("../controllers/orders-controllers/orderControllers");
+const getOrdersCompletes = require("../controllers/orders-controllers/getOrdersCompletes");
 
 // ordersRutes.get("/:id", async (req, res) => {
 //   const id = req.params.id;
@@ -24,5 +25,7 @@ ordersRutes.get("/", async (req, res) => {
     res.status(400).json({ message: "No hay ordenes para mostrar" });
   }
 });
+
+ordersRutes.get("/orders-completes", getOrdersCompletes);
 
 module.exports = ordersRutes;

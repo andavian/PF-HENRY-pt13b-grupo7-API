@@ -1,22 +1,22 @@
 //aqui van las rutas get/post/put/delete correspondientes
 const { Router } = require("express");
-const clientsRoutes = Router();
+const usersRoutes = Router();
 
-const getClients = require("../controllers/clients  - controllers/getClients");
-const getClienteByName = require("../controllers/clients  - controllers/getClientByName");
-const deleteClients = require("../controllers/clients  - controllers/deleteClients");
-const postClients = require("../controllers/clients  - controllers/postClients");
+const getUsers = require("../controllers/users  - controllers/getUsers");
+const getUsersByName = require("../controllers/users  - controllers/getUsersByName");
+const deleteUsers = require("../controllers/users  - controllers/deleteUsers");
+const postUsers = require("../controllers/users  - controllers/postUsers");
 
-clientsRoutes.get("/", async (req, res) => {
+usersRoutes.get("/", async (req, res) => {
   try {
-    const allClients = await getClients();
-    return res.status(200).json(allClients);
+    const allUsers = await getUsers();
+    return res.status(200).json(allUsers);
   } catch (error) {
     res.status(400).json({ message: "No hay clientes para mostrar" });
   }
 });
 
-clientsRoutes.get("/name", async (req, res) => {
+usersRoutes.get("/name", async (req, res) => {
   try {
     const { name } = req.query;
     const clientByName = await getClienteByName(name);
@@ -31,16 +31,16 @@ clientsRoutes.get("/name", async (req, res) => {
   }
 });
 
-clientsRoutes.post("/", async (req, res) => {
+usersRoutes.post("/", async (req, res) => {
   try {
     const response = req.body;
-    const clientPost = await postClients(response);
+    const clientPost = await postUsers(response);
     res.status(201).json(clientPost);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-clientsRoutes.delete("/delete", deleteClients);
+usersRoutes.delete("/delete", deleteUsers);
 
-module.exports = clientsRoutes;
+module.exports = usersRoutes;
