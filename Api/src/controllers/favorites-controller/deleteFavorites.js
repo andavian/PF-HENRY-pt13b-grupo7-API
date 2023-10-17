@@ -1,17 +1,19 @@
-const { Favorite } = require("../../db");
+const { User } = require("../../db");
 
 const deleteFavorites = async (req, res) => {
-  const { name } = req.query;
-  console.log(name);
+  const { userId, productID } = req.body;
 
-  const nameToLowerCase = name.toLowerCase();
-  console.log(nameToLowerCase);
   try {
-    await Favorite.destroy({
-      where: { name: nameToLowerCase },
-    });
-    const allFavorite = await Favorite.findAll();
-    res.status(200).json(allFavorite);
+    // Buscamos al usuario por su ID
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    await user.favorite.filter((favorite) => user.favorite !== productID);
+
+    res.status(200).json(user.favorite);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

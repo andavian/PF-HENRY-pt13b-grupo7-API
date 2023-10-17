@@ -39,28 +39,45 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
-const { Cart, Category, Client, Favorite, Order, Product } = sequelize.models;
+const { Admin, Cart, Category, Order, Product, Profile, Review, User } =
+  sequelize.models;
 
 // Aca vendrian las relaciones
 
+//?-----Relaciones Categoría/Producto-----//
 Category.hasMany(Product, { foreignKey: "categoryId" });
 Product.belongsTo(Category, { foreignKey: "categoryId" });
 
-//Relacion Cliente con Carrito
-Client.hasOne(Cart);
-Cart.belongsTo(Client);
+//?-----Relaciones de Carrito-----//
+//Relacion Usuario con Carrito
+User.hasOne(Cart);
+Cart.belongsTo(User);
 
 //Relacion entre Producto y Carrito
 Cart.belongsToMany(Product, { through: "CartProduct" });
 Product.belongsToMany(Cart, { through: "CartProduct" });
 
-//Relacion entre Oreden de compra y Carrito
+//Relacion entre Orden de compra y Carrito
 Cart.belongsTo(Order);
 Order.hasOne(Cart);
 
-//Relacin entre Favoritos y cclientes
-Favorite.belongsToMany(Client, { through: "FavoriteClient" });
-Client.belongsToMany(Favorite, { through: "FavoriteClient" });
+//?-----Relaciones de Review-----//
+//Review con User
+User.hasMany(Review, { foreingnKey: "userId" });
+Review.belongsTo(User, { foreingnKey: "userId" });
+
+//review con poducto
+Product.hasMany(Review, { foreingnKey: "productId" });
+Review.belongsTo(Product, { foreingnKey: "productId" });
+
+//?-----Relaciones de Perfil-----//
+//Perfil con Usuario
+User.hasOne(Profile);
+Profile.belongsTo(User);
+
+//Profile con Admin
+Admin.hasOne(Profile);
+Profile.belongsTo(Admin);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
