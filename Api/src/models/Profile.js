@@ -30,10 +30,7 @@ module.exports = (sequelize) => {
       mobilenumber: {
         type: DataTypes.INTEGER,
       },
-      favorites: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        defaultValue: [],
-      },
+      
     },
     { freezeTableName: true, timestamps: false }
   );

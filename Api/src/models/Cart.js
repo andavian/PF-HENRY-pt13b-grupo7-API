@@ -9,10 +9,6 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      completed: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false, // Por defecto, un registro se considera un carrito
-      },
     },
     { freezeTableName: true, timestamps: false }
   );

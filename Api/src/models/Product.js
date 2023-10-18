@@ -25,11 +25,27 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      offer: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      offer_percentage: {
+        type: DataTypes.DECIMAL,
+        validate: {
+          min: 0.05,
+          max: 0.75,
+        },
+      },
       stock: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false,
       },
+
+      quantity: {
+        type: DataTypes.INTEGER,
+      },
+
       hidden: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
