@@ -5,7 +5,7 @@ const categoriesRoutes = Router();
 const getCategories = require("../controllers/categories - controllers/getCategories");
 //const getCategoriesById = require("../controllers/getCategoriesById");
 const postCategories = require("../controllers/categories - controllers/postCategories");
-const getProductByCategoryId = require("../controllers/categories - controllers/getCategoriesById");
+const getProductByCategoryId = require("../controllers/product - controllers/getProductByCategoryId");
 const deleteCategories = require("../controllers/categories - controllers/deleteCategories");
 
 categoriesRoutes.get("/:id", async (req, res) => {
