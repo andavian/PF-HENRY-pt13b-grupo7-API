@@ -2,16 +2,27 @@ const { Category } = require("../../db");
 
 const deleteCategory = async (req, res) => {
   const { name } = req.query;
-  console.log(name);
-
   const nameToLowerCase = name.toLowerCase();
-  console.log(nameToLowerCase);
+
   try {
-    await Category.destroy({
+    // Buscar la categoría por nombre
+    const category = await Category.findOne({
       where: { name: nameToLowerCase },
     });
-    const pokemons = await Category.findAll();
-    res.status(200).json(pokemons);
+
+    if (!category) {
+      return res.status(404).json({ error: "Categoría no encontrada" });
+    }
+
+    // Realizar el borrado lógico actualizando el campo "isDeleted"
+    await category.update({ isDeleted: true });
+
+    // Opcional: Recuperar todas las categorías no eliminadas
+    const remainingCategories = await Category.findAll({
+      where: { isDeleted: false },
+    });
+
+    res.status(200).json(remainingCategories);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

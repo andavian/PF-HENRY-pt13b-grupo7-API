@@ -1,18 +1,26 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-  sequelize.define('Category', {
-    id: {
-        type:DataTypes.UUID,
-        defaultValue:DataTypes.UUIDV4,
+  sequelize.define(
+    "Category",
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
-    name:{
-        type : DataTypes.STRING,
-        allowNull:false
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      thumbnail: {
+        type: DataTypes.TEXT,
+      },
+      isDeleted: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
-    thumbnail:{
-        type : DataTypes.TEXT,
-    }
-  },{freezeTableName: true,
-    timestamps:false})}
+    { freezeTableName: true, timestamps: false }
+  );
+};
