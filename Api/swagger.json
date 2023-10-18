@@ -1,0 +1,92 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Henry Shop",
+    "version": "1.0.0",
+    "description": "Descripción de tu API"
+  },
+  "paths": {
+    "categories/{id}": {
+      "get": {
+        "summary": "Obtiene una categoría por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID de la categoría.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Categoría obtenida con éxito."
+          },
+          "400": {
+            "description": "No existe una categoría con el ID proporcionado."
+          }
+        }
+      }
+    },
+    "categories": {
+      "get": {
+        "summary": "Obtiene todas las categorías.",
+        "responses": {
+          "200": {
+            "description": "Lista de categorías obtenida con éxito."
+          },
+          "400": {
+            "description": "No hay categorías para mostrar."
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea una nueva categoría.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre de la categoría."
+                  },
+                  "thumbnail": {
+                    "type": "string",
+                    "description": "URL de la imagen en miniatura."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Categoría creada con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    },
+    "categories/delete": {
+      "delete": {
+        "summary": "Borra una categoría (lógicamente).",
+        "responses": {
+          "200": {
+            "description": "Categoría eliminada con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    }
+  },
+  "components": {},
+  "tags": []
+}
