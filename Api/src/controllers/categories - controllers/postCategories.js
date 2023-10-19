@@ -1,14 +1,6 @@
 //Post Categorias, No permite repetir nombre de categorias, indistintamente se escriban Mayus. y Minus.
 const { Category } = require("../../db");
 
-/**
- * Agregar una nueva categoría.
- * @param {string} name - El nombre de la categoría.
- * @param {string} thumbnail - La URL de la imagen en miniatura.
- * @returns {Promise<object>} El objeto de categoría creado.
- * @throws {Error} Si faltan datos, si la categoría ya existe o si ocurre un error en la base de datos.
- */
-
 const postCategories = async ({ name, thumbnail }) => {
   if (!name || !thumbnail) {
     throw new Error("Los datos de nombre y miniatura son obligatorios.");

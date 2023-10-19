@@ -1,32 +1,35 @@
-//Get Product Por ID
 const { Product, Category } = require("../../db");
 
+/**
+ * Obtiene un producto por su ID, incluyendo información de su categoría.
+ *
+ * @function
+ * @async
+ * @param {number} id - El ID del producto a buscar.
+ * @throws {Error} Si hay un error interno en el servidor.
+ * @returns {Promise<Object|null>} El producto encontrado o `null` si no se encuentra.
+ */
 const getProductsById = async (id) => {
-  const productIdBD = await Product.findOne({
-    where: { id },
-    include: [
-      {
-        model: Category,
-        attributes: ["name"],
-      },
-    ],
-  });
-  return productIdBD;
+  try {
+    const product = await Product.findOne({
+      where: { id },
+      include: [
+        {
+          model: Category,
+          attributes: ["name"],
+        },
+      ],
+    });
+
+    // Devolver `null` si el producto no se encuentra
+    if (!product) {
+      return null;
+    }
+
+    return product;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 module.exports = getProductsById;
-
-/*Hay que corregir para traer el name de Category. El sig. codigo es para buscar nombre en la relacion con la tabla Category - Ver si se puede implementar o usar otra forma
-
-{
-        where: { id },
-        include: {
-            model: Category,
-            attributes: ["name"],
-            through: {
-              attributes: [],
-            },
-          }
-    }
-
-*/

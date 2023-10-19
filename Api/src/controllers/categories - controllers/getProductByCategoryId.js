@@ -1,16 +1,9 @@
-const { Op } = require("sequelize");
 const { Product, Category } = require("../../db");
 
-const getProductByName = async (title) => {
+const getProductByCategoryId = async (categoryId) => {
   try {
-    const titleLowerCase = title.toLowerCase();
-
     const products = await Product.findAll({
-      where: {
-        title: {
-          [Op.iLike]: `%${titleLowerCase}%`,
-        },
-      },
+      where: { categoryId },
       include: [
         {
           model: Category,
@@ -18,11 +11,10 @@ const getProductByName = async (title) => {
         },
       ],
     });
-
     return products;
   } catch (error) {
     throw new Error(error.message);
   }
 };
 
-module.exports = getProductByName;
+module.exports = getProductByCategoryId;
