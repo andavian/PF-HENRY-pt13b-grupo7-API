@@ -33,8 +33,8 @@ usersRoutes.get("/name", async (req, res) => {
 
 usersRoutes.post("/", async (req, res) => {
   try {
-    const response = req.body;
-    const clientPost = await postUsers(response);
+    const userData = req.body.user;
+    const clientPost = await postUsers(userData);
     res.status(201).json(clientPost);
   } catch (error) {
     res.status(500).json({ error: error.message });

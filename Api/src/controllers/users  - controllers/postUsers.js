@@ -1,47 +1,23 @@
 //Post Client
-const { Client } = require("../../db");
+const { User } = require("../../db");
 
-const postClients = async ({
-  name,
-  email,
-  password,
-  billingaddress,
-  country,
-  locality,
-  mobilenumber,
-}) => {
-  const nameLowerCase = name.toLowerCase();
+const postUser = async ({ email }) => {
   const emailLowerCase = email.toLowerCase();
 
-  if (
-    !name ||
-    !email ||
-    !password ||
-    !billingaddress ||
-    !country ||
-    !locality ||
-    !mobilenumber
-  )
-    throw Error("Faltan datos");
+  if (!email) throw Error("Faltan datos");
 
-  const checkExistClient = await Client.findAll({
+  const checkExistUser = await User.findAll({
     where: {
       name: nameLowerCase,
     },
   });
-  if (checkExistClient.length > 0) throw Error("Ya existe el cliente");
+  if (checkExistUser.length > 0) throw Error("Ya existe el cliente");
 
-  const newClient = await Client.create({
-    name: nameLowerCase,
+  const newUser = await User.create({
     email: emailLowerCase,
-    password,
-    billingaddress,
-    country,
-    locality,
-    mobilenumber,
   });
 
-  return newClient;
+  return newUser;
 };
 
-module.exports = postClients;
+module.exports = postUser;

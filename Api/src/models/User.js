@@ -7,6 +7,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     favorites: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       defaultValue: [],
