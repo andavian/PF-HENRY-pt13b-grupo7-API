@@ -8,7 +8,7 @@ const postUser = async ({ email }) => {
 
   const checkExistUser = await User.findAll({
     where: {
-      name: nameLowerCase,
+      email: emailLowerCase,
     },
   });
   if (checkExistUser.length > 0) throw Error("Ya existe el cliente");
