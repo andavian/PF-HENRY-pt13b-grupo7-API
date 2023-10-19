@@ -10,7 +10,11 @@ const options = {
       description: "Descripción de tu API",
     },
   },
-  apis: ["./src/routes/routes-categories.js", "./src/routes/routes-product.js"], // Rutas con anotaciones Swagger
+  apis: [
+    "./src/routes/routes-categories.js",
+    "./src/routes/routes-product.js",
+    "./src/routes/routes-payment.js",
+  ], // Rutas con anotaciones Swagger
 };
 
 const swaggerSpec = swaggerJSDoc(options);
