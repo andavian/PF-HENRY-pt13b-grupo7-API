@@ -85,6 +85,187 @@
           }
         }
       }
+    },
+    "/products/search": {
+      "get": {
+        "summary": "Busca productos por nombre.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "description": "Nombre del producto a buscar.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de productos obtenida con éxito."
+          },
+          "404": {
+            "description": "No se encontraron productos con el nombre proporcionado."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "delete": {
+        "summary": "Elimina un producto por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID del producto a eliminar.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto eliminado con éxito."
+          },
+          "400": {
+            "description": "No existe un producto con el ID proporcionado."
+          }
+        }
+      },
+      "get": {
+        "summary": "Obtiene un producto por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID del producto.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Producto obtenido con éxito."
+          },
+          "400": {
+            "description": "No existe un producto con el ID proporcionado."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Actualiza un producto por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID del producto.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Nuevo título del producto."
+                  },
+                  "price": {
+                    "type": "number",
+                    "description": "Nuevo precio del producto."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Nueva descripción del producto."
+                  },
+                  "primaryimage": {
+                    "type": "string",
+                    "description": "Nueva URL de la imagen principal del producto."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Producto actualizado con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "Obtiene todos los productos.",
+        "responses": {
+          "200": {
+            "description": "Lista de productos obtenida con éxito."
+          },
+          "400": {
+            "description": "No hay productos para mostrar."
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea un nuevo producto.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "description": "Título del producto."
+                  },
+                  "price": {
+                    "type": "number",
+                    "description": "Precio del producto."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Descripción del producto."
+                  },
+                  "primaryimage": {
+                    "type": "string",
+                    "description": "URL de la imagen principal del producto."
+                  },
+                  "stock": {
+                    "type": "number",
+                    "description": "Cantidad en stock del producto."
+                  },
+                  "categoryName": {
+                    "type": "string",
+                    "description": "Nombre de la categoría a la que pertenece el producto."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Producto creado con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
     }
   },
   "components": {},

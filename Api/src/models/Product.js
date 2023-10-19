@@ -42,10 +42,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
 
-      quantity: {
-        type: DataTypes.INTEGER,
-      },
-
       hidden: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,

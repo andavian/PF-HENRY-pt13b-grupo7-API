@@ -7,31 +7,47 @@ const postProducts = async ({
   price,
   description,
   primaryimage,
+  stock,
   categoryName,
 }) => {
-  const titleLowerCase = title.toLowerCase();
-  const descriptionLowerCase = description.toLowerCase();
-  const categoryId = await categoryID(categoryName);
+  try {
+    const titleLowerCase = title.toLowerCase();
+    const descriptionLowerCase = description.toLowerCase();
+    const categoryId = await categoryID(categoryName);
 
-  if (!title || !price || !description || !primaryimage || !categoryName)
-    throw Error("Faltan datos");
+    if (
+      !title ||
+      !price ||
+      !description ||
+      !primaryimage ||
+      !stock ||
+      !categoryName
+    )
+      throw Error("Faltan datos");
 
-  const checkExistProduct = await Product.findAll({
-    where: {
+    const checkExistProduct = await Product.findAll({
+      where: {
+        title: titleLowerCase,
+      },
+    });
+
+    if (checkExistProduct.length > 0) {
+      throw Error("Ya existe el producto");
+    }
+
+    const newProduct = await Product.create({
       title: titleLowerCase,
-    },
-  });
-  if (checkExistProduct.length > 0) throw Error("Ya existe el producto");
+      price,
+      description: descriptionLowerCase,
+      primaryimage,
+      stock,
+      categoryId,
+    });
 
-  const newProduct = await Product.create({
-    title: titleLowerCase,
-    price,
-    description: descriptionLowerCase,
-    primaryimage,
-    categoryId,
-  });
-
-  return newProduct;
+    return newProduct;
+  } catch (error) {
+    throw new Error(error.message);
+  }
 };
 
 module.exports = postProducts;

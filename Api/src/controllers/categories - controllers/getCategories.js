@@ -1,11 +1,6 @@
 //Get All Categories
 const { Category } = require("../../db");
 
-/**
- * Obtener todas las categorías disponibles.
- * @returns {Promise<Array>} Un array de objetos de categoría.
- * @throws {Error} Si ocurre un error durante la obtención de categorías.
- */
 const getCategories = async () => {
   try {
     const allCategories = await Category.findAll();

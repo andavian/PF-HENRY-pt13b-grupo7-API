@@ -3,7 +3,7 @@ const categoriesRoutes = Router();
 
 const getCategories = require("../controllers/categories - controllers/getCategories");
 const postCategories = require("../controllers/categories - controllers/postCategories");
-const getProductByCategoryId = require("../controllers/product - controllers/getProductByCategoryId");
+const getProductByCategoryId = require("../controllers/categories - controllers/getProductByCategoryId");
 const deleteCategories = require("../controllers/categories - controllers/deleteCategories");
 
 /**
