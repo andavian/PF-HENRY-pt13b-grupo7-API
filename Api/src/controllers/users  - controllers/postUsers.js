@@ -1,10 +1,11 @@
 //Post Client
 const { User } = require("../../db");
 
-const postUser = async ({ email }) => {
+const postUser = async ({ name, email }) => {
+  const nameLowerCase = name.toLowerCase();
   const emailLowerCase = email.toLowerCase();
 
-  if (!email) throw Error("Faltan datos");
+  if (!name || !email) throw Error("Faltan datos");
 
   const checkExistUser = await User.findAll({
     where: {
@@ -14,6 +15,7 @@ const postUser = async ({ email }) => {
   if (checkExistUser.length > 0) throw Error("Ya existe el cliente");
 
   const newUser = await User.create({
+    name: nameLowerCase,
     email: emailLowerCase,
   });
 
