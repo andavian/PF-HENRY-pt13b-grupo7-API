@@ -1,20 +1,28 @@
-const { Client } = require("../../db");
+const { User } = require("../../db");
 
-const deleteClients = async (req, res) => {
-  const { name } = req.query;
-  console.log(name);
+const deleteUser = async (req, res) => {
+  const id = req.params.id;
 
-  const nameToLowerCase = name.toLowerCase();
-  console.log(nameToLowerCase);
   try {
-    await Client.destroy({
-      where: { name: nameToLowerCase },
+    // Buscar el usuario por ID
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "usuario no encontrado" });
+    }
+
+    // Realizar el borrado lógico actualizando el campo "banned"
+    await user.update({ banned: true });
+
+    // Obtener los usuarios restantes (no baneados)
+    const unbannedUsers = await User.findAll({
+      where: { banned: false },
     });
-    const allClient = await Client.findAll();
-    res.status(200).json(allClient);
+
+    res.status(200).json(unbannedUsers);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = deleteClients;
+module.exports = deleteUser;

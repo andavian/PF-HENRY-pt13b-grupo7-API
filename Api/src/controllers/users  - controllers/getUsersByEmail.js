@@ -2,17 +2,17 @@
 const { Op } = require("sequelize");
 const { User } = require("../../db");
 
-const getUserByName = async (name) => {
-  const nameLowerCase = name.toLowerCase();
+const getUserByEmail = async (email) => {
+  const emailLowerCase = email.toLowerCase();
 
   const user = await User.findAll({
     where: {
-      name: {
-        [Op.iLike]: `%${nameLowerCase}%`,
+      email: {
+        [Op.iLike]: `%${emailLowerCase}%`,
       },
     },
   });
   return user;
 };
 
-module.exports = getUserByName;
+module.exports = getUserByEmail;

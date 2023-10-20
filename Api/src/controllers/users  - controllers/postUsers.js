@@ -1,7 +1,7 @@
 //Post Client
 const { User } = require("../../db");
 
-const postUser = async ({ name, email }) => {
+const postUser = async (name, email) => {
   const nameLowerCase = name.toLowerCase();
   const emailLowerCase = email.toLowerCase();
 
@@ -12,7 +12,7 @@ const postUser = async ({ name, email }) => {
       email: emailLowerCase,
     },
   });
-  if (checkExistUser.length > 0) throw Error("Ya existe el cliente");
+  if (checkExistUser.length > 0) return checkExistUser;
 
   const newUser = await User.create({
     name: nameLowerCase,
