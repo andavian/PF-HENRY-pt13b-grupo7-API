@@ -1,9 +1,9 @@
 //Get All Clients
-const { Client } = require("../../db");
+const { User } = require("../../db");
 
-const getClients = async () => {
-  const allClients = await Client.findAll();
-  return allClients;
+const getUsers = async () => {
+  const allUsers = await User.findAll();
+  return allUsers;
 };
 
-module.exports = getClients;
+module.exports = getUsers;
