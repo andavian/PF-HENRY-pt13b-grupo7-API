@@ -12,6 +12,10 @@ const ordersRoutes = require("./routes-orders");
 const paymentRoutes = require("./routes-payment");
 const reviewsRoutes = require("./routes-reviews");
 
+//Ruta para Nodemailer
+const mailerRoutes= require("./routeMail");
+
+
 const router = Router();
 
 router.use("/categories", categoriesRoutes);
@@ -22,5 +26,9 @@ router.use("/products", productsRoutes);
 router.use("/orders", ordersRoutes);
 router.use("/payment", paymentRoutes);
 router.use("/reviews", reviewsRoutes);
+
+//Ruta para Nodemailer
+router.use("/mail", mailerRoutes);
+
 
 module.exports = router;
