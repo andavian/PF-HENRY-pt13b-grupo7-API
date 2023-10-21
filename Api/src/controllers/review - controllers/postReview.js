@@ -1,31 +1,37 @@
 //Post un Review
-const { conn } = require("../../db");
-const { Review, User, Product } = conn.models;
-//const cliId = require("../../utils/cliId");
-//const prodId = require("../../utils/prodId");
+const { Review, User, Product } = require("../../db");
+const userID = require("../../utils/userId");
 
-const postReview = async ({ userId, productId, description, rating }) => {
-  //const clientId = await cliId(nameClient);
-  //const productId = await prodId(nameProd);
-  const userExist = await User.findByPk(userId);
-  const productExist = await Product.findByPk(productId);
+const postReview = async (productId, email, description, rating) => {
+  const userId = await userID(email);
 
-  if (!userId || !productId || !description || !rating)
-    throw Error("Faltan datos");
+  //const emailLowerCase = email.toLowerCase();
+
+  // const userExist = await User.findOne({
+  //   where: {
+  //     email: emailLowerCase,
+  //   },
+  // });
+  // console.log("existe el usuario", userExist);
+
+  const productExist = await Product.findOne({ where: { id: productId } });
+  console.log("existe el producto", productExist);
+
+  if (!productId || !description || !rating) throw Error("Faltan datos");
 
   const checkExistReview = await Review.findAll({
     where: {
-      userId: userExist.userId,
-      productId: productExist.productId,
+      UserId: userId,
+      ProductId: productExist.id,
     },
   });
   if (checkExistReview.length > 0) throw Error("Ya existe la Review");
 
   const newReview = await Review.create({
-    userId: userExist.userId,
-    productId: productExist.productId,
     description,
     rating,
+    ProductId: productId,
+    UserId: userId,
   });
   return newReview;
 };

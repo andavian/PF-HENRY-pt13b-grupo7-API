@@ -27,10 +27,15 @@ reviewsRoutes.get("/", async (req, res) => {
 
 reviewsRoutes.post("/", async (req, res) => {
   try {
-    const response = req.body;
-    console.log(response);
-    const reviewPost = await postReview(response);
-    
+    const { productId } = req.query;
+    const { email, description, rating } = req.body;
+    console.log("productID", productId);
+    console.log("description", description);
+    console.log("rating", rating);
+    console.log("userEmail", email);
+
+    const reviewPost = await postReview(productId, email, description, rating);
+
     res.status(201).json(reviewPost);
   } catch (error) {
     res.status(500).json({ error: error.message });
