@@ -10,11 +10,16 @@ const cartsRoutes = require("./routes-carts.js");
 const productsRoutes = require("./routes-product.js");
 const ordersRoutes = require("./routes-orders");
 const paymentRoutes = require("./routes-payment");
+
 const reviewsRoutes = require("./routes-reviews");
 
 //Ruta para Nodemailer
-const mailerRoutes= require("./routeMail");
+const mailerRoutes = require("./routeMail");
 
+const reviewsRoutes = require("./routes-reviews");
+
+//Ruta para Nodemailer
+const mailerRoutes = require("./routeMail");
 
 const router = Router();
 
@@ -29,6 +34,9 @@ router.use("/reviews", reviewsRoutes);
 
 //Ruta para Nodemailer
 router.use("/mail", mailerRoutes);
+router.use("/reviews", reviewsRoutes);
 
+//Ruta para Nodemailer
+router.use("/mail", mailerRoutes);
 
 module.exports = router;
