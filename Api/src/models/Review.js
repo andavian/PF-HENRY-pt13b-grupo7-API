@@ -21,10 +21,6 @@ module.exports = (sequelize) => {
         },
         allowNull: false,
       },
-      hidden: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
     },
     { freezeTableName: true, timestamps: true }
   );

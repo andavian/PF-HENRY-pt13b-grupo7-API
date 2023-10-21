@@ -1,21 +1,11 @@
 //Post un Review
-const { Review, User, Product } = require("../../db");
+const { Review, Product } = require("../../db");
 const userID = require("../../utils/userId");
 
 const postReview = async (productId, email, description, rating) => {
   const userId = await userID(email);
 
-  //const emailLowerCase = email.toLowerCase();
-
-  // const userExist = await User.findOne({
-  //   where: {
-  //     email: emailLowerCase,
-  //   },
-  // });
-  // console.log("existe el usuario", userExist);
-
   const productExist = await Product.findOne({ where: { id: productId } });
-  console.log("existe el producto", productExist);
 
   if (!productId || !description || !rating) throw Error("Faltan datos");
 
