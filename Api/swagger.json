@@ -305,6 +305,238 @@
           }
         }
       }
+    },
+    "/users/{id}": {
+      "delete": {
+        "summary": "Elimina un usuario por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID del usuario a eliminar.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario eliminado con éxito."
+          },
+          "400": {
+            "description": "No existe un usuario con el ID proporcionado."
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Obtiene la lista de todos los usuarios.",
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida con éxito."
+          },
+          "400": {
+            "description": "No hay usuarios para mostrar."
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea un nuevo usuario.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Nombre del usuario."
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "Dirección de correo electrónico del usuario."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuario creado con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    },
+    "/users/search": {
+      "get": {
+        "summary": "Busca usuarios por su dirección de correo electrónico.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "email",
+            "description": "Dirección de correo electrónico del usuario a buscar.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de usuarios obtenida con éxito."
+          },
+          "404": {
+            "description": "No se encontraron usuarios con el email proporcionado."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    },
+    "/reviews": {
+      "delete": {
+        "summary": "Elimina una reseña (lógicamente).",
+        "responses": {
+          "200": {
+            "description": "Reseña eliminada con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      },
+      "get": {
+        "summary": "Obtiene la lista de todas las reseñas.",
+        "responses": {
+          "200": {
+            "description": "Lista de reseñas obtenida con éxito."
+          },
+          "400": {
+            "description": "No hay reseñas para mostrar."
+          }
+        }
+      },
+      "post": {
+        "summary": "Crea una nueva reseña para un producto.",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "productId",
+            "description": "ID del producto al que se asocia la reseña.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Dirección de correo electrónico del revisor."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Descripción de la reseña."
+                  },
+                  "rating": {
+                    "type": "integer",
+                    "description": "Calificación de la reseña."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Reseña creada con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
+    },
+    "/reviews/{id}": {
+      "get": {
+        "summary": "Obtiene una reseña por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID de la reseña.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reseña obtenida con éxito."
+          },
+          "400": {
+            "description": "No existe una reseña con el ID proporcionado."
+          }
+        }
+      },
+      "patch": {
+        "summary": "Actualiza una reseña por ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ID de la reseña a actualizar.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "description": "Nueva dirección de correo electrónico del revisor."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Nueva descripción de la reseña."
+                  },
+                  "rating": {
+                    "type": "integer",
+                    "description": "Nueva calificación de la reseña."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reseña actualizada con éxito."
+          },
+          "500": {
+            "description": "Error interno del servidor."
+          }
+        }
+      }
     }
   },
   "components": {},

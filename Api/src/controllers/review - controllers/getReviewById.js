@@ -2,22 +2,20 @@
 const { Product, Review, User } = require("../../db");
 
 const getReviewById = async (id) => {
-  const reviewIdBD = await Review.findOne({
-    where: { id },
+  const review = await Review.findByPk(id, {
     include: [
       {
         model: Product,
         attributes: ["title"],
       },
-    ],
-    include: [
       {
         model: User,
         attributes: ["name"],
       },
     ],
   });
-  return reviewIdBD;
+
+  return review;
 };
 
 module.exports = getReviewById;
