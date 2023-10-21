@@ -14,6 +14,11 @@ const options = {
     "./src/routes/routes-categories.js",
     "./src/routes/routes-product.js",
     "./src/routes/routes-payment.js",
+    "./src/routes/routes-users.js",
+    "./src/routes/routes-reviews.js",
+    "./src/routes/routes-orders.js",
+    "./src/routes/routes-favorites.js",
+    "./src/routes/routes-carts.js",
   ], // Rutas con anotaciones Swagger
 };
 
