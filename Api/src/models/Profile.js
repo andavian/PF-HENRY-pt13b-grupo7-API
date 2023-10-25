@@ -9,17 +9,14 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
       },
-      name: {
+
+      image: {
         type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
       },
 
       billingaddress: {
         type: DataTypes.TEXT,
+        allowNull: false,
       },
       country: {
         type: DataTypes.TEXT,
@@ -30,7 +27,6 @@ module.exports = (sequelize) => {
       mobilenumber: {
         type: DataTypes.INTEGER,
       },
-      
     },
     { freezeTableName: true, timestamps: false }
   );
