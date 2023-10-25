@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const profilesRoutes = Router();
 
-//const getReviews = require("../controllers/review - controllers/getReviews");
+const getProfile = require("../controllers/profiles-controllers/getProfile");
 //const getReviewById = require("../controllers/review - controllers/getReviewById");
 const postProfile = require("../controllers/profiles-controllers/postProfile");
 //const deleteReview = require("../controllers/review - controllers/deleteReview");
@@ -30,14 +30,15 @@ const postProfile = require("../controllers/profiles-controllers/postProfile");
 //   }
 // });
 
-// profilesRoutes.get("/", async (req, res) => {
-//   try {
-//     const allReviews = await getReviews();
-//     return res.status(200).json(allReviews);
-//   } catch (error) {
-//     res.status(400).json({ message: "No hay reseñas para mostrar" });
-//   }
-// });
+profilesRoutes.get("/", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const profile = await getProfile(email);
+    return res.status(200).json(profile);
+  } catch (error) {
+    res.status(400).json({ message: "No hay perfil para mostrar" });
+  }
+});
 
 profilesRoutes.post("/", async (req, res) => {
   try {
