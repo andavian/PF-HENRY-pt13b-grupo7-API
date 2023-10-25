@@ -58,8 +58,8 @@ Cart.belongsToMany(Product, { through: "CartProduct" });
 Product.belongsToMany(Cart, { through: "CartProduct" });
 
 //Relacion entre Orden de compra y Carrito
-Cart.belongsTo(Order);
-Order.hasOne(Cart);
+Order.belongsTo(Cart);
+Cart.hasOne(Order);
 
 //?-----Relaciones de Review-----//
 //Review con User

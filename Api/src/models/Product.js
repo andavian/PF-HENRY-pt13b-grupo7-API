@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
         defaultValue: false,
       },
       offer_percentage: {
-        type: DataTypes.DECIMAL,
+        type: DataTypes.FLOAT,
         validate: {
           min: 0.05,
           max: 0.75,
@@ -47,6 +47,6 @@ module.exports = (sequelize) => {
         defaultValue: false,
       },
     },
-    { freezeTableName: true, timestamps: false }
+    { freezeTableName: true, timestamps: true }
   );
 };

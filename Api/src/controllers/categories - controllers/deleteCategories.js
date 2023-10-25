@@ -15,7 +15,9 @@ const deleteCategory = async (req, res) => {
     }
 
     // Realizar el borrado lógico actualizando el campo "isDeleted"
-    await category.update({ isDeleted: true });
+    category.isDeleted
+      ? await category.update({ isDeleted: false })
+      : await category.update({ isDeleted: true });
 
     // Opcional: Recuperar todas las categorías no eliminadas
     const remainingCategories = await Category.findAll({
