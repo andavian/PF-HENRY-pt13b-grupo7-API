@@ -30,6 +30,14 @@ const updateProduct = async (id, updatedAttributes) => {
       product.stock = updatedAttributes.stock;
     }
 
+    if (updatedAttributes.offer) {
+      product.offer = updatedAttributes.offer;
+    }
+
+    if (updatedAttributes.offer_percentage) {
+      product.offer_percentage = updatedAttributes.offer_percentage;
+    }
+
     // Guardar los cambios en la base de datos
     await product.save();
 

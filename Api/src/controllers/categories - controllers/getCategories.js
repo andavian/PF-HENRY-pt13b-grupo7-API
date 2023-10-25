@@ -3,7 +3,11 @@ const { Category } = require("../../db");
 
 const getCategories = async () => {
   try {
-    const allCategories = await Category.findAll();
+    const allCategories = await Category.findAll({
+      where: {
+        isDeleted: false,
+      },
+    });
     return allCategories;
   } catch (error) {
     throw new Error("No se pueden obtener las categorías en este momento.");

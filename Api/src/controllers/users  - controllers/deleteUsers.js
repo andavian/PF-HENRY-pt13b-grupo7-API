@@ -12,7 +12,9 @@ const deleteUser = async (req, res) => {
     }
 
     // Realizar el borrado lógico actualizando el campo "banned"
-    await user.update({ banned: true });
+    user.banned
+      ? await user.update({ banned: false })
+      : await user.update({ banned: true });
 
     // Obtener los usuarios restantes (no baneados)
     const unbannedUsers = await User.findAll({

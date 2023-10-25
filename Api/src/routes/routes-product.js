@@ -1,13 +1,39 @@
 const { Router } = require("express");
 const productsRoutes = Router();
 
-const getProducts = require("../controllers/product - controllers/getProducts");
-const getProductByName = require("../controllers/product - controllers/getProductByName");
-const getProductsById = require("../controllers/product - controllers/getProductsById");
+const {
+  getAllProducts,
+  getProducts,
+  getProductByName,
+  getProductsById,
+  getNewProducts,
+  getOnSaleProducts,
+} = require("../controllers/product - controllers/getProducts");
+
 const postProducts = require("../controllers/product - controllers/postProducts");
 const updateProduct = require("../controllers/product - controllers/updateProduct");
-const deleteProduct = require("../controllers/product - controllers/deleteProduct");
+const {
+  deleteProduct,
+  deleteOffer,
+} = require("../controllers/product - controllers/deleteProduct");
 
+productsRoutes.get("/offer", async (req, res) => {
+  try {
+    const allProducts = await getOnSaleProducts();
+    return res.status(200).json(allProducts);
+  } catch (error) {
+    res.status(400).json({ message: "No hay productos para mostrar" });
+  }
+});
+
+productsRoutes.get("/new", async (req, res) => {
+  try {
+    const allProducts = await getNewProducts();
+    return res.status(200).json(allProducts);
+  } catch (error) {
+    res.status(400).json({ message: "No hay productos para mostrar" });
+  }
+});
 /**
  * @swagger
  * /products/search:
@@ -43,6 +69,15 @@ productsRoutes.get("/search", async (req, res) => {
   }
 });
 
+productsRoutes.get("/admin", async (req, res) => {
+  try {
+    const allProducts = await getAllProducts();
+    return res.status(200).json(allProducts);
+  } catch (error) {
+    res.status(400).json({ message: "No hay productos para mostrar" });
+  }
+});
+
 /**
  * @swagger
  * /products/{id}:
@@ -61,6 +96,8 @@ productsRoutes.get("/search", async (req, res) => {
  *       400:
  *         description: No existe un producto con el ID proporcionado.
  */
+productsRoutes.delete("/offer", deleteOffer);
+
 productsRoutes.delete("/:id", deleteProduct);
 
 /**

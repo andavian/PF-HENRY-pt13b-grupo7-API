@@ -16,6 +16,7 @@ module.exports = (sequelize) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
       },
       favorites: {
         type: DataTypes.ARRAY(DataTypes.STRING),
