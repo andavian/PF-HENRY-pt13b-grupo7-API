@@ -4,8 +4,7 @@ const profilesRoutes = Router();
 const getProfile = require("../controllers/profiles-controllers/getProfile");
 //const getReviewById = require("../controllers/review - controllers/getReviewById");
 const postProfile = require("../controllers/profiles-controllers/postProfile");
-//const deleteReview = require("../controllers/review - controllers/deleteReview");
-//const updateReview = require("../controllers/review - controllers/updateReview");
+const updateProfile = require("../controllers/profiles-controllers/updateProfile");
 
 //profilesRoutes.delete("/", deleteReview);
 
@@ -19,16 +18,16 @@ const postProfile = require("../controllers/profiles-controllers/postProfile");
 //   }
 // });
 
-// profilesRoutes.patch("/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const updatedAttributes = req.body;
-//     const updatedReview = await updateReview(id, updatedAttributes);
-//     res.status(200).json(updatedReview);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
+profilesRoutes.patch("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedAttributes = req.body;
+    const updatedProfile = await updateProfile(id, updatedAttributes);
+    res.status(200).json(updatedProfile);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 profilesRoutes.get("/", async (req, res) => {
   const { email } = req.body;
