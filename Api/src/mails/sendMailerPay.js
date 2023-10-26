@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { EMAIL, PASSEMAIL } = process.env;
 
-const sendMailer = async ({ 
+const sendMailerPay = async ({ 
   email,
   
 }) => {
@@ -18,11 +18,11 @@ const sendMailer = async ({
     });
 
     const htmlEmail = `
-      <h1>Estimado cliente su registro en Henry Fans fue exitoso</h1>
+      <h1>Estimado Cliente, hemos procesado su compra en Henry Fans con éxito. Enviaremos su pedido a la dirección de entrega registrada. Muchas gracias por su compra.</h1>
       
     `;
-    const subject = "Registro de usuario en Henry Fans exitoso"
-    const text = "Tenemos el agrado de darale la Bienvenida a Henry Fans."
+    const subject = "Proceso de compra en Henry Fans exitoso"
+    const text = "Estimado Cliente, hemos procesado su compra en Henry Fans con exito. Enviaremos su pedido a la dirección de entrega registrada. Muchas gracias por su compra."
 
     const mailOptions = {
       from: EMAIL, // Quien manda el email
@@ -99,4 +99,4 @@ const sendMailer = async ({
   }
 };
 
-module.exports = sendMailer;
+module.exports = sendMailerPay;
