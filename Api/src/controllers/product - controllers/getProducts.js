@@ -98,7 +98,7 @@ const getProductByName = async (title) => {
 const getProductsById = async (id) => {
   try {
     const product = await Product.findOne({
-      where: { id },
+      where: { Id: id },
       include: [
         {
           model: Category,
