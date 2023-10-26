@@ -34,6 +34,7 @@ productsRoutes.get("/new", async (req, res) => {
     res.status(400).json({ message: "No hay productos para mostrar" });
   }
 });
+
 /**
  * @swagger
  * /products/search:
