@@ -3,10 +3,11 @@ require("dotenv").config();
 const { EMAIL, PASSEMAIL } = process.env;
 
 const sendMailer = async ({ 
-  email,
-  
+  to, 
+  subject, 
+  text,
 }) => {
-  if ( !email ) throw Error("Faltan datos");
+  if ( !to || !subject || !text) throw Error("Faltan datos");
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -18,15 +19,13 @@ const sendMailer = async ({
     });
 
     const htmlEmail = `
-      <h1>Estimado cliente su registro en Henry Fans fue exitoso</h1>
-      
+      <h1>Felicidades, su compra fue exitosa</h1>
+      <h2>Lista de artículos</h2>
     `;
-    const subject = "Registro de usuario en Henry Fans exitoso"
-    const text = "Tenemos el agrado de darale la Bienvenida a Henry Fans."
 
     const mailOptions = {
       from: EMAIL, // Quien manda el email
-      to: email, // El email de destino
+      to, // El email de destino
       replyTo: EMAIL,
       subject, // El asunto del email
       text, // El mensaje
@@ -36,11 +35,11 @@ const sendMailer = async ({
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) {
         console.log(err);
-        throw Error("Fallo el envío de correo");
+        return res.status(500).json({ error: "Error al enviar el correo" });
       }
       // console.log("Mensaje enviado: %s", info.mensaje);
       // console.log("Url del mensaje: %s", nodemailer.getTestMessageUrl(info));
-      return message = "Correo enviado exitosamente";
+      res.json({ message: "Correo enviado exitosamente" });
     });
     /*SIN IMPLEMENTAR ENVIO DE PRODUCTO EN MAIL
 
@@ -94,8 +93,8 @@ const sendMailer = async ({
     });
     */
 
-  } catch (error) {
-    throw new Error(error.message);
+  } catch ({ message }) {
+    res.json({ error: message });
   }
 };
 
