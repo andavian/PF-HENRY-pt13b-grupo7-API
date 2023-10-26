@@ -121,7 +121,7 @@ productsRoutes.delete("/:id", deleteProduct);
  */
 productsRoutes.get("/:id", async (req, res) => {
   try {
-    const { id } = req.params;
+    const id = req.params.id;
     const productById = await getProductsById(id);
     res.status(200).json(productById);
   } catch (error) {
