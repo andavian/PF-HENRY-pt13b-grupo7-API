@@ -25,7 +25,7 @@ const postProfile = async ({
     });
 
     if (checkExistPofile.length > 0) {
-      throw Error("Ya existe el perfil");
+      return checkExistPofile;
     }
 
     const newProfile = await Profile.create({

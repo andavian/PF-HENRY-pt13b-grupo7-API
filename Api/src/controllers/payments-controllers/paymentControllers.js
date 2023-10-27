@@ -46,8 +46,9 @@ const createOrder = async (req, res) => {
       locale: "en-US",
       landing_page: "LOGIN",
       user_action: "PAY_NOW",
-      return_url: "http://localhost:3001/payment/capture-order",
-      cancel_url: "http://localhost:3000/store",
+      return_url:
+        "https://server-henry-shop.onrender.com/payment/capture-order",
+      cancel_url: "https://pf-henry-pt13b-grupo7.vercel.app/store",
     },
   };
 
@@ -82,12 +83,12 @@ const captureOrder = async (req, res) => {
   });
 
   console.log(newOrder);
-  res.redirect("http://localhost:3001/orders");
+  res.redirect("https://pf-henry-pt13b-grupo7.vercel.app/confirmacion");
 };
 
 const cancelOrder = (req, res) => {
   const { token, PayerID } = req.query;
-  res.redirect("http://localhost:3000/store");
+  res.redirect("https://pf-henry-pt13b-grupo7.vercel.app//store");
 };
 
 module.exports = { createOrder, captureOrder, cancelOrder };
