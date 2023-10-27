@@ -2,12 +2,8 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 const { EMAIL, PASSEMAIL } = process.env;
 
-const sendMailer = async ({ 
-  to, 
-  subject, 
-  text,
-}) => {
-  if ( !to || !subject || !text) throw Error("Faltan datos");
+const sendMailer = async ({ to, subject, text }) => {
+  if (!to || !subject || !text) throw Error("Faltan datos");
   try {
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -19,8 +15,8 @@ const sendMailer = async ({
     });
 
     const htmlEmail = `
-      <h1>Felicidades, su compra fue exitosa</h1>
-      <h2>Lista de artículos</h2>
+      <h1>Estimado cliente su registro fue exitoso</h1>
+      <h2>Ahora complete su perfil para una mejor experiencia de compra</h2>
     `;
 
     const mailOptions = {
@@ -92,7 +88,6 @@ const sendMailer = async ({
       res.json({ message: "Correo enviado exitosamente" });
     });
     */
-
   } catch ({ message }) {
     res.json({ error: message });
   }
