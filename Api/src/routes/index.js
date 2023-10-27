@@ -15,7 +15,6 @@ const profilesRoutes = require("./routes-profile");
 
 //Ruta para Nodemailer
 const mailerRoutes = require("./routeMail");
-const mailerRoutesPay = require("./routeMailPay");
 
 const router = Router();
 
@@ -31,6 +30,5 @@ router.use("/profiles", profilesRoutes);
 
 //Ruta para Nodemailer
 router.use("/mail", mailerRoutes);
-router.use("/mailpay", mailerRoutesPay);
 
 module.exports = router;
